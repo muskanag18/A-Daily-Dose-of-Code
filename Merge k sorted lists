@@ -1,5 +1,7 @@
 Link for the problem - https://leetcode.com/problems/merge-k-sorted-lists/
 
+I DID USING PRIORITY QUEUE
+
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
