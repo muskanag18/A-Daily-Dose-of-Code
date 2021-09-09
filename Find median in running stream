@@ -1,0 +1,75 @@
+Link for the problem - https://practice.geeksforgeeks.org/problems/find-median-in-a-stream-1587115620/1
+
+
+public:
+    //Function to insert heap.
+    priority_queue<int> maxh;
+    priority_queue<int, vector<int>, greater<int>> minh;
+    
+    void insertHeap(int &x)
+    {
+        int l = maxh.size();
+        int r = minh.size();
+        if(l == 0)
+        maxh.push(x);
+        
+        else if(l == r)
+        {
+            if(x < minh.top())
+                maxh.push(x);
+            else
+            {
+                int t = minh.top();
+                minh.pop();
+                minh.push(x);
+                maxh.push(t);
+            }
+        }
+        
+        else
+        {
+            if(r == 0)
+            {
+             if(x > maxh.top())
+                minh.push(x);
+             else
+             {
+                 int t = maxh.top();
+                 maxh.pop();
+                 maxh.push(x);
+                 minh.push(t);
+             }
+            }
+            
+            else if(x >= minh.top())
+                minh.push(x);
+            
+            else 
+            {
+                if(x < maxh.top()){
+                int t = maxh.top();
+                maxh.pop();
+                maxh.push(x);
+                minh.push(t);
+                }
+                else
+                    minh.push(x);
+            }
+        }
+    }
+    
+    //Function to return Median.
+    double getMedian()
+    {
+        int l = maxh.size();
+        int r = minh.size();
+        
+        if(l > r)
+        return (double)maxh.top();
+        
+        return (double)(maxh.top() + minh.top())/2;
+    }
+    
+   
+TIME COMPLEXITY - O(N LOG N)
+SPACE COMPLEXITY - O(N)
