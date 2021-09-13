@@ -1,0 +1,36 @@
+Link for the problem - https://leetcode.com/problems/trapping-rain-water/
+
+
+int trap(vector<int>& h) {
+        
+        int n = h.size(), ans = 0;
+        int a[n], b[n];
+        a[0] = h[0];
+        
+        for(int i=1;i<n;i++)
+        {
+            if(a[i-1] > h[i])
+                a[i] = a[i-1];
+            else
+                a[i] = h[i];
+        }
+        
+        b[n-1] = h[n-1];
+        for(int i=n-2;i>=0;i--)
+        {
+            if(b[i+1] > h[i])
+                b[i] = b[i+1];
+            else
+                b[i] = h[i];
+        }
+        
+        for(int i=0;i<n;i++)
+        {   
+            ans += (min(a[i], b[i]) - h[i]);
+        }
+        
+        return ans;
+    }
+    
+TIME COMPLEXITY - O(N)
+SPACE COMPLEXITY - O(N)
